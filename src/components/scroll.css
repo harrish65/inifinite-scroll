@@ -1,0 +1,60 @@
+/* Basic table styles */
+table {
+    width: 100%;
+    border-collapse:inherit;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  /* Header styles */
+  thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+  }
+  
+  /* Zebra striping for rows */
+  tbody tr:nth-child(even) {
+    background-color: #f3f3f3;
+  }
+  
+  /* Hover effect for rows */
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Optional: Styling the table borders */
+  table, th, td {
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+  }
+  
+  /* Optional: Adding some padding and spacing around the table */
+  table {
+    margin: 25px 0;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
