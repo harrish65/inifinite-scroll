@@ -4,21 +4,30 @@ const Scroll = () => {
   const [records, setRecords] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const ref = useRef();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
 
     try {
+      const limit = 30;
+      const skip = (page - 1) * limit;
+
       const response = await fetch(
-        `https://dummyjson.com/users?limit=30&skip=0`
+        `https://dummyjson.com/users?limit=${limit}&skip=${skip}`
       );
       const data = await response.json();
 
       if (Array.isArray(data.users)) {
-        setRecords((prev) => [...prev, ...data.users]);
+        setRecords((prev) => [...new Set([...prev, ...data.users])]);
+     if (data.users.length < limit ||  data.users.length === 208) {
+          setHasMore(false);
+        }
+
       } else {
         console.error("Unexpected data structure:", data);
+        setHasMore(false)
       }
       setLoading(false);
     } catch (error) {
@@ -39,7 +48,7 @@ const Scroll = () => {
     };
 
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !loading) {
+      if (entry.isIntersecting && !loading && hasMore) {
         setPage((prev) => prev + 1);
       }
     }, options);
@@ -53,7 +62,7 @@ const Scroll = () => {
         observer.unobserve(ref.current);
       }
     };
-  }, [ref, loading]);
+  }, [ref, loading,hasMore]);
   return (
     <>
       <UsersTable records={records} />
