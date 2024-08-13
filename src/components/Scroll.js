@@ -21,7 +21,7 @@ const Scroll = () => {
 
       if (Array.isArray(data.users)) {
         setRecords((prev) => [...prev, ...data.users]);
-        if (data.users.length < limit || data.users.length === 208) {
+        if (data.users.length < limit || records.length+ data.users.length >= 208) {
           setHasMore(false);
         }
       } else {
