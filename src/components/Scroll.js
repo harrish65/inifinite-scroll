@@ -20,14 +20,13 @@ const Scroll = () => {
       const data = await response.json();
 
       if (Array.isArray(data.users)) {
-        setRecords((prev) => [...new Set([...prev, ...data.users])]);
-     if (data.users.length < limit ||  data.users.length === 208) {
+        setRecords((prev) => [...prev, ...data.users]);
+        if (data.users.length < limit || data.users.length === 208) {
           setHasMore(false);
         }
-
       } else {
         console.error("Unexpected data structure:", data);
-        setHasMore(false)
+        setHasMore(false);
       }
       setLoading(false);
     } catch (error) {
@@ -62,7 +61,7 @@ const Scroll = () => {
         observer.unobserve(ref.current);
       }
     };
-  }, [ref, loading,hasMore]);
+  }, [ref, loading, hasMore]);
   return (
     <>
       <UsersTable records={records} />
